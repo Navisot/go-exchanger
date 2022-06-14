@@ -1,4 +1,4 @@
-package services
+package interfaces
 
 import "github.com/navisot/go-exchanger/requests"
 

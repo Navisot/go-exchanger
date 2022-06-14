@@ -3,21 +3,15 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/navisot/go-exchanger/requests"
-	"github.com/navisot/go-exchanger/services"
+	"github.com/navisot/go-exchanger/services/interfaces"
 	"net/http"
 )
 
 type ConvertController struct {
-	ConvertService services.ConvertServiceInterface
+	I interfaces.ConvertServiceInterface
 }
 
-func NewConvertController(convertService services.ConvertServiceInterface) ConvertController {
-	return ConvertController{
-		ConvertService: convertService,
-	}
-}
-
-func (c ConvertController) Convert(ctx *gin.Context) {
+func (c *ConvertController) Convert(ctx *gin.Context) {
 
 	var data *requests.ConvertRequest
 
@@ -26,7 +20,7 @@ func (c ConvertController) Convert(ctx *gin.Context) {
 		return
 	}
 
-	result, err := c.ConvertService.Convert(data)
+	result, err := c.I.Convert(data)
 
 	if err != nil {
 		ctx.JSON(http.StatusBadGateway, err.Error())

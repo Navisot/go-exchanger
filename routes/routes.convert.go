@@ -10,7 +10,7 @@ import (
 func InitConvertRoutes(db *driver.DBDriver, route *gin.Engine) {
 
 	convertService := services.NewECBConvertService()
-	convertController := controllers.NewConvertController(convertService)
+	convertController := controllers.ConvertController{I: convertService}
 
 	groupRoute := route.Group("/api/v1")
 	groupRoute.POST("/convert", convertController.Convert)

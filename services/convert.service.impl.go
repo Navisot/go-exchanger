@@ -5,7 +5,9 @@ import (
 	"errors"
 	"github.com/navisot/go-exchanger/helpers"
 	"github.com/navisot/go-exchanger/requests"
+	"github.com/navisot/go-exchanger/services/interfaces"
 	"github.com/navisot/go-exchanger/xml_config"
+	"github.com/spf13/viper"
 	"net/http"
 	"strconv"
 )
@@ -17,7 +19,7 @@ var (
 type ECBConvert struct{}
 
 // NewECBConvertService returns a new ConvertServiceInterface
-func NewECBConvertService() ConvertServiceInterface {
+func NewECBConvertService() interfaces.ConvertServiceInterface {
 	return &ECBConvert{}
 }
 
@@ -42,7 +44,7 @@ func (ecb *ECBConvert) Convert(data *requests.ConvertRequest) (float64, error) {
 // parseXML gets the XML file and decodes it
 func parseXML() error {
 
-	res, err := http.Get("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
+	res, err := http.Get(viper.GetString("XML_URL"))
 
 	if err != nil {
 		return err
