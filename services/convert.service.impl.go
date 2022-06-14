@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"github.com/navisot/go-exchanger/helpers"
-	"github.com/navisot/go-exchanger/requests"
+	"github.com/navisot/go-exchanger/http/requests"
 	"github.com/navisot/go-exchanger/services/interfaces"
 	"github.com/navisot/go-exchanger/xml_config"
 	"github.com/spf13/viper"

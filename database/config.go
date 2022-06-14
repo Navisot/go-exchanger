@@ -1,14 +1,13 @@
-package config
+package database
 
 import (
-	driver "github.com/navisot/go-exchanger/database"
 	"log"
 )
 
 // ConnectToDatabase creates a new database connection
-func ConnectToDatabase(dsn string) (*driver.DBDriver, error) {
+func ConnectToDatabase(dsn string) (*DBDriver, error) {
 
-	newDB, err := driver.NewDatabase(dsn)
+	newDB, err := NewDatabase(dsn)
 
 	if err != nil {
 		panic(err)
@@ -24,5 +23,5 @@ func ConnectToDatabase(dsn string) (*driver.DBDriver, error) {
 		log.Fatal(err.Error())
 	}
 
-	return &driver.DBDriver{Gorm: newDB}, nil
+	return &DBDriver{Gorm: newDB}, nil
 }
